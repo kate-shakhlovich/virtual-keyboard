@@ -32,6 +32,7 @@ export default class Keyboard {
         document.addEventListener('keydown', (e) => {
             this.isShifted = e.shiftKey;
             this.isAlted = e.altKey;
+            this.el.classList.toggle("keyboard_isShifted", e.shiftKey);
         });
 
         document.addEventListener('keyup', (e) => {
@@ -40,6 +41,7 @@ export default class Keyboard {
             }
             this.isShifted = e.shiftKey;
             this.isAlted = e.altKey;
+            this.el.classList.toggle("keyboard_isShifted", e.shiftKey);
         });
     }
 

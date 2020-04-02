@@ -65,7 +65,7 @@ textarea {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    /* margin: 0px 0px 0px 6px; */
+    /* margin: 0px 0px 0px 4px; */
     padding: 0;
     width: 38px;
     height: 38px;
@@ -85,10 +85,27 @@ textarea {
     color: rgb(8, 24, 78);
 }
 
-.button_width_xl {
-
+.button_width_m {
+    width: 58px;
 }
 
-.button_width_s {
-    
+.button_width_l {
+    width: 86px;
+    font-size: 12px;
+}
+
+.button_width_xl {
+    width: 158px;
+}
+
+.keyboard_isShifted .button__value {
+    display: none;
+}
+
+.keyboard_isShifted .button__value_add {
+    display: inline;
+}
+
+.button__value_add {
+    display: none;
 }

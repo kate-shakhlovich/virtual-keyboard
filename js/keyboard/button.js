@@ -6,8 +6,8 @@ export default class Button {
         this.code = code;
         this.enValue = (enValue || '').toString().toLowerCase();
         this.ruValue = (ruValue || '').toString().toLowerCase();
-        this.enValueAdd = enValueAdd || '';
-        this.ruValueAdd = ruValueAdd || '';
+        this.enValueAdd = enValueAdd || this.enValue.toUpperCase();
+        this.ruValueAdd = ruValueAdd || this.ruValue.toUpperCase();;
         this.width = width || WIDTH.S;
         this._language = language || LANGUAGE.EN;
         this.el = document.createElement("div");
@@ -19,8 +19,8 @@ export default class Button {
         this.el.innerHTML = '';
         const spanValueEl = document.createElement("span");
         spanValueEl.classList.add("button__value");
-        spanValueEl.innerText = this.value.toUpperCase(); 
-        const spanValueAddEl = document.createElement("sup");
+        spanValueEl.innerText = this.value; 
+        const spanValueAddEl = document.createElement("span");
         spanValueAddEl.classList.add("button__value_add");
         spanValueAddEl.innerText = this.valueAdd;
         this.el.append(spanValueAddEl);
