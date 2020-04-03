@@ -12,7 +12,8 @@ const buttons = [
             code: "Digit1",
             enValue: "1",
             ruValue: "1",
-            enValueAdd: "!"
+            enValueAdd: "!",
+            ruValueAdd: "!"
         },
         {
             code: "Digit2",
@@ -39,7 +40,8 @@ const buttons = [
             code: "Digit5",
             enValue: "5",
             ruValue: "5",
-            enValueAdd: "%"
+            enValueAdd: "%",
+            ruValueAdd: "%"
         },
         {
             code: "Digit6",
@@ -59,19 +61,22 @@ const buttons = [
             code: "Digit8",
             enValue: "8",
             ruValue: "8",
-            enValueAdd: "*"
+            enValueAdd: "*",
+            ruValueAdd: "*"
         },
         {
             code: "Digit9",
             enValue: "9",
             ruValue: "9",
-            enValueAdd: "("
+            enValueAdd: "(",
+            ruValueAdd: "("
         },
         {
             code: "Digit0",
             enValue: "0",
             ruValue: "0",
-            enValueAdd: ")"
+            enValueAdd: ")",
+            ruValueAdd: ")"
         },
         {
             code: "Minus",

@@ -59,6 +59,11 @@ export default class Keyboard {
             this.outputEl.value = this.outputEl.value.substring(0, this.outputEl.value.length - 1);
             this.outputEl.focus();
         }
+
+        this.buttons.find(x => x.code === "Delete").el.onclick = (e) => {
+            this.outputEl.value = this.outputEl.value.substring(1);
+            this.outputEl.focus();
+        }
     }
 
     set language(value) {
