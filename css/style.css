@@ -37,7 +37,7 @@ textarea {
     width: 717px;
     height: 250px;
     align-content: space-between;
-    background: radial-gradient(#8dc2f0, #2466e2);
+    background-color: #2466e2;
     flex-wrap: wrap;
     padding: 5px;
     box-shadow: 0px 0px 10px #000b6b;
@@ -95,7 +95,7 @@ textarea {
 }
 
 .button_width_xl {
-    width: 158px;
+    width: 275px;
 }
 
 .keyboard_isShifted .button__value {

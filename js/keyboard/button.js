@@ -4,10 +4,11 @@ export default class Button {
     constructor(opts) {
         const { code, enValue, ruValue, enValueAdd, ruValueAdd, width, language } = opts || {};
         this.code = code;
-        this.enValue = (enValue || '').toString().toLowerCase();
-        this.ruValue = (ruValue || '').toString().toLowerCase();
-        this.enValueAdd = enValueAdd || this.enValue.toUpperCase();
-        this.ruValueAdd = ruValueAdd || this.ruValue.toUpperCase();;
+        this.isRegular = enValue.length === 1;
+        this.enValue = enValue.length > 1 ? enValue : enValue.toLowerCase();
+        this.ruValue = ruValue.length > 1 ? ruValue : ruValue.toLowerCase();
+        this.enValueAdd = enValueAdd || (enValue.length > 1 ? enValue : enValue.toUpperCase());
+        this.ruValueAdd = ruValueAdd || (ruValue.length > 1 ? ruValue : ruValue.toUpperCase());
         this.width = width || WIDTH.S;
         this._language = language || LANGUAGE.EN;
         this.el = document.createElement("div");
@@ -28,11 +29,6 @@ export default class Button {
         return this.el;
     }
 
-    attachEvents(outputEl, getIsShifted) {
-        this.el.onclick = (event) => {
-            outputEl.value = outputEl.value + (getIsShifted() ? this.valueAdd || this.value.toUpperCase() : this.value);
-        };
-    }
 
     get value() {
         return this.language == LANGUAGE.EN ? this.enValue : this.ruValue;

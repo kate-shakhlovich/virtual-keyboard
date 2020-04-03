@@ -21,7 +21,6 @@ export default class Keyboard {
                 const button = new Button(Object.assign({ language: this.language }, buttonOpts));
                 this.buttons.push(button);
                 rowEl.append(button.draw());
-                button.attachEvents(this.outputEl, () => this.isShifted);
             });
         });
 
@@ -43,6 +42,23 @@ export default class Keyboard {
             this.isAlted = e.altKey;
             this.el.classList.toggle("keyboard_isShifted", e.shiftKey);
         });
+
+        for (const button of this.buttons.filter(x => x.isRegular)) {
+            button.el.onclick = (e) => {
+                this.outputEl.value += (e.shiftKey ? button.valueAdd || button.value.toUpperCase() : button.value);
+                this.outputEl.focus();
+            };
+        }
+
+        this.buttons.find(x => x.code === "Enter").el.onclick = (e) => {
+            this.outputEl.value += "\n";
+            this.outputEl.focus();
+        }
+        
+        this.buttons.find(x => x.code === "Backspace").el.onclick = (e) => {
+            this.outputEl.value = this.outputEl.value.substring(0, this.outputEl.value.length - 1);
+            this.outputEl.focus();
+        }
     }
 
     set language(value) {
@@ -54,4 +70,6 @@ export default class Keyboard {
     get language() {
         return this._language;
     }
+    
+
 }
