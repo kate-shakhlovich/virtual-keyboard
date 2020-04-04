@@ -29,35 +29,61 @@ export default class Keyboard {
 
     attachEvents() {
         document.addEventListener('keydown', (e) => {
-            this.el.classList.toggle("keyboard_isShifted", e.shiftKey);
+            
+            toggleKeys(e.shiftKey);
         });
 
         document.addEventListener('keyup', (e) => {
             if(e.key == "Control" && e.altKey || e.key == "Alt" && e.ctrlKey) {
                 this.language = this.language === LANGUAGE.EN ? LANGUAGE.RU : LANGUAGE.EN;
             }
-            this.el.classList.toggle("keyboard_isShifted", e.shiftKey);
+            toggleKeys(e.shiftKey);
         });
 
         for (const button of this.buttons.filter(x => x.isRegular)) {
             button.el.onclick = (e) => {
-                this.outputEl.value += (e.shiftKey ? button.valueAdd || button.value.toUpperCase() : button.value);
-                this.outputEl.focus();
+                const buttonValue = e.shiftKey ? button.valueAdd || button.value.toUpperCase() : button.value;
+                addCharacter(buttonValue);
             };
         }
 
         this.buttons.find(x => x.code === "Enter").el.onclick = (e) => {
-            this.outputEl.value += "\n";
+            addCharacter("\n");
+        }
+
+        this.buttons.find(x => x.code === "Tab").el.onclick = (e) => {
+            addCharacter("\t");
+        }
+
+        this.buttons.find(x => x.code === "CapsLock").el.onclick = (e) => {
+            this.isCapsLock = !this.isCapsLock;
+            toggleKeys();
+        }
+
+        const shiftButtons = this.buttons.filter(x => x.code === "ShiftLeft" || x.code === "ShiftRight");
+        shiftButtons.forEach(shiftButton => { 
+            shiftButton.el.addEventListener('mousedown', (e) => {
+                toggleKeys(true);
+            });
+            shiftButton.el.addEventListener('mouseup', (e) => {
+                toggleKeys(false);
+            });
+        });
+
+        const addCharacter = (charValue) => {
+            const { value, selectionStart, selectionEnd } = this.outputEl;
             this.outputEl.focus();
+            if (value.length === selectionEnd) {
+                this.outputEl.value += charValue;
+            } else {
+                this.outputEl.value = value.substring(0, selectionStart) + charValue + value.substring(selectionEnd);
+                this.outputEl.setSelectionRange(selectionEnd + 1, selectionEnd + 1);
+            }
         }
         
         const removeCharacter = (position) => {
             const { value, selectionStart, selectionEnd } = this.outputEl;
-            // const value = this.outputEl.value;
-            // const selectionStart = this.outputEl.selectionStart;
-            // const selectionEnd = this.outputEl.selectionEnd;
             this.outputEl.focus();
-            
             if (selectionStart === selectionEnd) {
                 this.outputEl.value = value.substring(0, position) + value.substring(position + 1);
                 this.outputEl.setSelectionRange(position, position);
@@ -65,7 +91,6 @@ export default class Keyboard {
                 this.outputEl.value = value.substring(0, selectionStart) + value.substring(selectionEnd);
                 this.outputEl.setSelectionRange(selectionStart, selectionStart);
             }
-            
         }
 
         this.buttons.find(x => x.code === "Backspace").el.onclick = (e) => {
@@ -75,6 +100,10 @@ export default class Keyboard {
         this.buttons.find(x => x.code === "Delete").el.onclick = (e) => {
             removeCharacter(this.outputEl.selectionStart);
         }
+        
+        const toggleKeys = (shiftKey) => this.el.classList.toggle("keyboard_isShifted", shiftKey ^ this.isCapsLock);
+
+        this.buttons.forEach(x => x.attachEvents());
     }
 
     set language(value) {

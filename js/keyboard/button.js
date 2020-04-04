@@ -29,6 +29,14 @@ export default class Button {
         return this.el;
     }
 
+    attachEvents() {
+        this.el.addEventListener('mousedown', (e) => {
+            this.el.classList.add("button_active");
+        });
+        this.el.addEventListener('mouseup', (e) => {
+            setTimeout(() => this.el.classList.remove("button_active"), 100);
+        });
+    }
 
     get value() {
         return this.language == LANGUAGE.EN ? this.enValue : this.ruValue;
@@ -46,5 +54,6 @@ export default class Button {
     get language() {
         return this._language;
     }
+    
     
 }
