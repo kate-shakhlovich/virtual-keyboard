@@ -331,7 +331,7 @@ const buttons = [
             ruValueAdd: "▲"
         },
         {
-            code: "ShiftLeft",
+            code: "ShiftRight",
             enValue: "Shift",
             ruValue: "Shift",
             enValueAdd: "Shift",
@@ -369,7 +369,7 @@ const buttons = [
             width: WIDTH.XL
         },
         {
-            code: "AltLeft",
+            code: "AltRight",
             enValue: "Alt",
             ruValue: "Alt",
             width: WIDTH.M

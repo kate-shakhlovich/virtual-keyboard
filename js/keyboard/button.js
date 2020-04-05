@@ -36,6 +36,10 @@ export default class Button {
         this.el.addEventListener('mouseup', (e) => {
             setTimeout(() => this.el.classList.remove("button_active"), 100);
         });
+
+        this.el.addEventListener("mouseout", () => {
+            setTimeout(() => this.el.classList.remove("button_active"), 100);
+        });
     }
 
     get value() {

@@ -29,13 +29,23 @@ export default class Keyboard {
 
     attachEvents() {
         document.addEventListener('keydown', (e) => {
-            
+            const pushedButton = this.buttons.find(x => x.code === e.code);
+            if (pushedButton) {
+                pushedButton.el.classList.add('button_active');
+            }
+            if(e.code === "CapsLock") {
+                this.isCapsLock = !this.isCapsLock;
+            }
             toggleKeys(e.shiftKey);
         });
 
         document.addEventListener('keyup', (e) => {
             if(e.key == "Control" && e.altKey || e.key == "Alt" && e.ctrlKey) {
                 this.language = this.language === LANGUAGE.EN ? LANGUAGE.RU : LANGUAGE.EN;
+            }
+            const pushedButton = this.buttons.find(x => x.code === e.code);
+            if (pushedButton) {
+                pushedButton.el.classList.remove('button_active');
             }
             toggleKeys(e.shiftKey);
         });
@@ -58,6 +68,14 @@ export default class Keyboard {
         this.buttons.find(x => x.code === "CapsLock").el.onclick = (e) => {
             this.isCapsLock = !this.isCapsLock;
             toggleKeys();
+        }
+
+        this.buttons.find(x => x.code === "Backspace").el.onclick = (e) => {
+            removeCharacter(this.outputEl.selectionStart - 1);
+        }
+
+        this.buttons.find(x => x.code === "Delete").el.onclick = (e) => {
+            removeCharacter(this.outputEl.selectionStart);
         }
 
         const shiftButtons = this.buttons.filter(x => x.code === "ShiftLeft" || x.code === "ShiftRight");
@@ -91,14 +109,6 @@ export default class Keyboard {
                 this.outputEl.value = value.substring(0, selectionStart) + value.substring(selectionEnd);
                 this.outputEl.setSelectionRange(selectionStart, selectionStart);
             }
-        }
-
-        this.buttons.find(x => x.code === "Backspace").el.onclick = (e) => {
-            removeCharacter(this.outputEl.selectionStart - 1);
-        }
-
-        this.buttons.find(x => x.code === "Delete").el.onclick = (e) => {
-            removeCharacter(this.outputEl.selectionStart);
         }
         
         const toggleKeys = (shiftKey) => this.el.classList.toggle("keyboard_isShifted", shiftKey ^ this.isCapsLock);

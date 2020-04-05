@@ -73,6 +73,7 @@ textarea {
     box-shadow: 0 0 5px rgb(8, 24, 78);
     cursor: pointer;
     transition: 0.3s;
+    user-select: none;
 }
 
 .button_active {
