@@ -1,3 +1,19 @@
 {
-    "extends": ["airbnb/base"]
-}
+    "extends": ["airbnb/base"],
+    "globals": {
+      "document": true,
+      "navigator": true,
+      "window": true,
+      "history": true
+    },
+    "rules": {
+        "import/extensions": ["warn", "ignorePackages", { "js": "always" }],
+        "indent": ["warn", "tab"],
+        "no-tabs": 0,
+        "linebreak-style": ["warn", "windows"],
+        "no-bitwise": 0,
+        "no-mixed-operators": 0,
+        "no-param-reassign": 0
+    }
+} 
+
