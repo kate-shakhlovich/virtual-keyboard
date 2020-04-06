@@ -75,6 +75,9 @@ export default class Keyboard {
 			}
 			if (e.code === 'CapsLock') {
 				this.isCapsLock = !this.isCapsLock;
+			} else if (e.code === 'Tab') {
+				e.preventDefault();
+				addCharacter('\t');
 			}
 			toggleKeys(e.shiftKey);
 		});
@@ -93,6 +96,10 @@ export default class Keyboard {
 				pushedButton.el.classList.remove('button_active');
 			}
 			toggleKeys(e.shiftKey);
+		});
+
+		document.addEventListener('keypress', (e) => {
+			
 		});
 
 		this.buttons.filter((x) => x.isRegular).forEach((button) => {
