@@ -1,0 +1,112 @@
+body {
+    background-image: url(../assets/background_img.jpg);
+    background-position: top;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+textarea {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    width: 715px;
+    height: 200px;
+    outline: none;
+    border: 1px solid #55adff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #000b6b;
+    resize: none;
+    white-space: pre-line;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    color: rgb(21, 10, 163);
+    tab-size: 8;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+}
+
+.keyboard {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5px;
+    width: 717px;
+    height: 250px;
+    align-content: space-between;
+    background-color: #2466e2;
+    flex-wrap: wrap;
+    padding: 5px;
+    box-shadow: 0px 0px 10px #000b6b;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+}
+
+.keyboard::after {
+    content: "Windows. Change language: 'CtrlLeft'+'AltLeft'";
+    position: absolute;
+    top: 490px;
+    left: 30%;
+    text-shadow: 2px 3px 2px #0a4714;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 2px;
+    background: radial-gradient(#2992ee, #1d5ee0);
+    box-shadow: 0 0 5px rgb(8, 24, 78);
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.button_active {
+    background: radial-gradient(#1950be, #174bb3);
+    color: rgb(8, 24, 78);
+    box-shadow: 0 0 5px #1d5ee0;
+}
+
+.button:hover {
+    color: rgb(8, 24, 78);
+}
+
+.button_width_m {
+    width: 58px;
+}
+
+.button_width_l {
+    width: 86px;
+    font-size: 12px;
+}
+
+.button_width_xl {
+    width: 275px;
+}
+
+.keyboard_isShifted .button__value {
+    display: none;
+}
+
+.keyboard_isShifted .button__value_add {
+    display: inline;
+}
+
+.button__value_add {
+    display: none;
+}
